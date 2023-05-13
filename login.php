@@ -34,9 +34,9 @@
     <form action="auth.php" method="POST">
       <div class="form px-4 pt-5">
       <input type="text" name="type" value="login" hidden>
-        <input type="text" name="email" class="form-control" placeholder="Email or Phone">
+        <input type="email" name="email" class="form-control" placeholder="Email or Phone" required>
 
-        <input type="text" name="password" class="form-control" placeholder="Password">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
         <button class="btn btn-dark btn-block" type="submit">Login</button>
 
       </div>
@@ -49,11 +49,11 @@
 
       <div class="form px-4">
       <input type="text" name="type" value="register" hidden>
-        <input type="text" name="name" class="form-control" placeholder="Name">
+        <input type="text" name="name" class="form-control" placeholder="Name" required>
 
-        <input type="text" name="email" class="form-control" placeholder="Email">
+        <input type="email" name="email" class="form-control" placeholder="Email" required>
         
-        <input type="text" name="password" class="form-control" placeholder="Password">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
 
         <button class="btn btn-dark btn-block" type="submit">Signup</button>
         
