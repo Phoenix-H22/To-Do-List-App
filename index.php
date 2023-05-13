@@ -1,24 +1,28 @@
 <?php include("db.php"); ?>
-
+<?php if ($_SESSION['id'] == null) {
+    header('Location: login.php');
+} ?>
 <?php include('includes/header.php'); ?>
 
 <main class="container p-4">
-  <div class="row">
-    <div class="col-md-4">
-      <!-- MESSAGES -->
+   <!-- MESSAGES -->
 
-      <?php if (isset($_SESSION['message'])) { ?>
+   <?php if (isset($_SESSION['message'])) { ?>
       <div class="alert alert-<?= $_SESSION['message_type']?> alert-dismissible fade show" role="alert">
         <?= $_SESSION['message']?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <?php session_unset(); } ?>
+      <?php unset($_SESSION["message"]); } ?>
+  <div class="row">
+    <div class="col-md-4">
+     
 
       <!-- ADD TASK FORM -->
       <div class="card card-body">
         <form action="save_task.php" method="POST">
+        <input type="number" name="user_id" value="<?=$_SESSION['id']?>" hidden>
           <div class="form-group">
             <input type="text" name="title" class="form-control" placeholder="Task Title" autofocus>
           </div>
@@ -46,7 +50,8 @@
           $result_tasks = mysqli_query($conn, $query);    
 
           while($row = mysqli_fetch_assoc($result_tasks)) { ?>
-          <tr>
+          <?php if ($row['user_id'] == $_SESSION['id']) { ?>
+            <tr>
             <td><?php echo $row['title']; ?></td>
             <td><?php echo $row['description']; ?></td>
             <td><?php echo $row['created_at']; ?></td>
@@ -59,6 +64,7 @@
               </a>
             </td>
           </tr>
+          <?php } ?>
           <?php } ?>
         </tbody>
       </table>
